@@ -1,19 +1,20 @@
-<mvc:View controllerName="project1.controller.View1" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:f="sap.f" xmlns:l="sap.ui.layout">
+<mvc:View controllerName="project1.controller.View1" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" 
+xmlns="sap.m" 
+xmlns:f="sap.f" 
+xmlns:l="sap.ui.layout"
+xmlns:core="sap.ui.core">
     <f:DynamicPage id="dynamicPageId" headerExpanded="{/headerExpanded}" toggleHeaderOnTitleClick="{/titleClickable}">
         <!-- DynamicPage Title -->
         <f:title>
             <f:DynamicPageTitle>
                 <f:heading>
-                    <Title text="Home" />
+                    <Title text="Gestione Ferie e Permessi" />
                 </f:heading>
                 <f:content>
                     <OverflowToolbar />
                 </f:content>
                 <f:actions>
-                    <Button text="Edit" type="Emphasized" press="toggleAreaPriority" />
-                    <Button text="Delete" type="Transparent" />
-                    <Button text="Copy" type="Transparent" />
-                    <Button text="Toggle Footer" type="Transparent" press="onToggleFooter" />
+                    <Button text="Visualizza" type="Emphasized" press="---" />
                 </f:actions>
                 <f:navigationActions />
             </f:DynamicPageTitle>
@@ -23,57 +24,54 @@
             <f:DynamicPageHeader pinnable="true" />
         </f:header>
         <f:content>
-            <Table id="idProductsTable" sticky="HeaderToolbar,ColumnHeaders" inset="false" items="{
-							path: '/ProductCollection',
-							sorter: {
-								path: 'Name'
-							}
-						}" class="sapFDynamicPageAlignContent" width="auto">
+            <Table noDataText="" id="idProductsTable" sticky="HeaderToolbar,ColumnHeaders" inset="false" class="sapFDynamicPageAlignContent" width="auto">
                 <headerToolbar>
                     <Toolbar>
-                        <Title text="Products" level="H2" />
+                        <Title text="Inserisci Giornate" level="H2" />
                     </Toolbar>
                 </headerToolbar>
                 <columns>
-                    <Column width="12em">
+                    <Column width="20em">
                         <Panel id="datePanel">
-                            <Label text="Data inizio" labelFor="DP8" />
-                            <DatePicker id="DP8" placeholder="Enter Date" change="handleChange" class="sapUiSmallMarginBottom" showFooter="true" />
+                           <Label text="Data inizio" labelFor="DTP2"/>
+		<DateTimePicker
+			id="DTP2"
+			showCurrentDateButton="true"
+			showCurrentTimeButton="true"
+			value="2022-12-07-09-00-00" valueFormat="yyyy-MM-dd-HH-mm-ss" displayFormat="long"
+			change="handleChange"
+			class="sapUiSmallMarginBottom"/>
                         </Panel>
                     </Column>
-                    <Column width="12em">
+                   <Column width="20em">
                         <Panel id="datePanel2">
-                            <Label text="Data fine" labelFor="DP7" />
-                            <DatePicker id="DP7" placeholder="Enter Date" change="handleChange" class="sapUiSmallMarginBottom" showFooter="true" />
+                           <Label text="Data fine" labelFor="DTP3"/>
+		<DateTimePicker
+			id="DTP3"
+			showCurrentDateButton="true"
+			showCurrentTimeButton="true"
+			value="2022-12-07-09-00-00" valueFormat="yyyy-MM-dd-HH-mm-ss" displayFormat="long"
+			change="handleChange"
+			class="sapUiSmallMarginBottom"/>
                         </Panel>
                     </Column>
-                    <Column minScreenWidth="Tablet" demandPopin="true">
-                        <Text text="Supplier" />
+					 <Column>
+					<l:VerticalLayout width="100%">
+		<Label text="Note" labelFor="note" />
+		<Input class="sapUiMediumMarginBottom"
+			id="productInput"
+			placeholder="Note">
+		</Input>
+	</l:VerticalLayout>
                     </Column>
-                    <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End">
-                        <Text text="Dimensions" />
+                    <Column>
+                        <CheckBox text="Giustificato" selected="false" />
                     </Column>
-                    <Column hAlign="End">
-                        <Text text="Price" />
+                    <Column hAlign="Begin">
+                        <Button type="Emphasized" press="-----" icon="sap-icon://save" text="Conferma"/>
                     </Column>
                 </columns>
-                <items>
-                    <ColumnListItem>
-                        <cells>
-                            <ObjectIdentifier title="{Name}" text="{ProductId}" />
-                            <Text text="{SupplierName}" />
-                            <Text text="{Width} x {Depth} x {Height} {DimUnit}" />
-                            <ObjectNumber number="{
-											parts:[{path:'Price'},{path:'CurrencyCode'}],
-											type: 'sap.ui.model.type.Currency',
-											formatOptions: {showMeasure: false}
-										}" unit="{CurrencyCode}" />
-                        </cells>
-                    </ColumnListItem>
-                </items>
             </Table>
         </f:content>
-        <!-- DynamicPage Footer -->
-        <f:footer />
     </f:DynamicPage>
 </mvc:View>
