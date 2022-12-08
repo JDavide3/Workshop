@@ -1,0 +1,77 @@
+<mvc:View controllerName="project1.controller.View1" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" 
+xmlns="sap.m" 
+xmlns:f="sap.f" 
+xmlns:l="sap.ui.layout"
+xmlns:core="sap.ui.core">
+    <f:DynamicPage id="dynamicPageId" headerExpanded="{/headerExpanded}" toggleHeaderOnTitleClick="{/titleClickable}">
+        <!-- DynamicPage Title -->
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="Gestione Ferie e Permessi" />
+                </f:heading>
+                <f:content>
+                    <OverflowToolbar />
+                </f:content>
+                <f:actions>
+                    <Button text="Visualizza" type="Emphasized" press="---" />
+                </f:actions>
+                <f:navigationActions />
+            </f:DynamicPageTitle>
+        </f:title>
+        <!-- DynamicPage Header -->
+        <f:header>
+            <f:DynamicPageHeader pinnable="true" />
+        </f:header>
+        <f:content>
+            <Table noDataText="" id="idProductsTable" sticky="HeaderToolbar,ColumnHeaders" inset="false" class="sapFDynamicPageAlignContent" width="auto">
+                <headerToolbar>
+                    <Toolbar>
+                        <Title text="Inserisci Giornate" level="H2" />
+                    </Toolbar>
+                </headerToolbar>
+                <columns>
+                    <Column width="20em">
+                        <Panel id="datePanel">
+                           <Label text="Data inizio" labelFor="DTP2"/>
+		<DateTimePicker
+			id="DTP2"
+			showCurrentDateButton="true"
+			showCurrentTimeButton="true"
+			value="2022-12-07-09-00-00" valueFormat="yyyy-MM-dd-HH-mm-ss" displayFormat="long"
+			change="handleChange"
+			class="sapUiSmallMarginBottom"/>
+                        </Panel>
+                    </Column>
+                   <Column width="20em">
+                        <Panel id="datePanel2">
+                           <Label text="Data fine" labelFor="DTP3"/>
+		<DateTimePicker
+			id="DTP3"
+			showCurrentDateButton="true"
+			showCurrentTimeButton="true"
+			value="2022-12-07-09-00-00" valueFormat="yyyy-MM-dd-HH-mm-ss" displayFormat="long"
+			change="handleChange"
+			class="sapUiSmallMarginBottom"/>
+                        </Panel>
+                    </Column>
+					 <Column>
+					<l:VerticalLayout width="100%">
+		<Label text="Note" labelFor="note" />
+		<Input class="sapUiMediumMarginBottom"
+			id="productInput"
+			placeholder="Note">
+		</Input>
+	</l:VerticalLayout>
+                    </Column>
+                    <Column>
+                        <CheckBox text="Giustificato" selected="false" />
+                    </Column>
+                    <Column hAlign="Begin">
+                        <Button type="Emphasized" press="-----" icon="sap-icon://save" text="Conferma"/>
+                    </Column>
+                </columns>
+            </Table>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
