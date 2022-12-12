@@ -8,13 +8,14 @@ xmlns:core="sap.ui.core">
         <f:title>
             <f:DynamicPageTitle>
                 <f:heading>
-                    <Title text="Gestione Ferie e Permessi" />
+                    <Title text="Manager" />
                 </f:heading>
                 <f:content>
                     <OverflowToolbar />
                 </f:content>
                 <f:actions>
-                    <Button text="Visualizza" type="Emphasized" press="---" />
+                    <Button text="Visualizza tutti" type="Emphasized" press="---" />
+                    <Button text="Da approvare" type="Critical" press="---" />
                 </f:actions>
                 <f:navigationActions />
             </f:DynamicPageTitle>
@@ -27,48 +28,21 @@ xmlns:core="sap.ui.core">
             <Table noDataText="" id="idProductsTable" sticky="HeaderToolbar,ColumnHeaders" inset="false" class="sapFDynamicPageAlignContent" width="auto">
                 <headerToolbar>
                     <Toolbar>
-                        <Title text="Inserisci Giornate" level="H2" />
+                        <Title text="Gestione attività" level="H1" />
                     </Toolbar>
                 </headerToolbar>
                 <columns>
                     <Column width="20em">
-                        <Panel id="datePanel">
-                           <Label text="Data inizio" labelFor="DTP2"/>
-		<DateTimePicker
-			id="DTP2"
-			showCurrentDateButton="true"
-			showCurrentTimeButton="true"
-			value="2022-12-07-09-00-00" valueFormat="yyyy-MM-dd-HH-mm-ss" displayFormat="long"
-			change="handleChange"
-			class="sapUiSmallMarginBottom"/>
-                        </Panel>
                     </Column>
                    <Column width="20em">
-                        <Panel id="datePanel2">
-                           <Label text="Data fine" labelFor="DTP3"/>
-		<DateTimePicker
-			id="DTP3"
-			showCurrentDateButton="true"
-			showCurrentTimeButton="true"
-			value="2022-12-07-09-00-00" valueFormat="yyyy-MM-dd-HH-mm-ss" displayFormat="long"
-			change="handleChange"
-			class="sapUiSmallMarginBottom"/>
-                        </Panel>
                     </Column>
 					 <Column>
-					<l:VerticalLayout width="100%">
-		<Label text="Note" labelFor="note" />
-		<Input class="sapUiMediumMarginBottom"
-			id="productInput"
-			placeholder="Note">
-		</Input>
-	</l:VerticalLayout>
                     </Column>
-                    <Column>
-                        <CheckBox text="Giustificato" selected="false" />
+                    <Column hAlign="End">
+                        <Button type="Success" press="-----" text="Approva"/>
                     </Column>
                     <Column hAlign="Begin">
-                        <Button type="Emphasized" press="-----" icon="sap-icon://save" text="Conferma"/>
+                        <Button type="Negative" press="-----" text="Rifiuta"/>
                     </Column>
                 </columns>
             </Table>

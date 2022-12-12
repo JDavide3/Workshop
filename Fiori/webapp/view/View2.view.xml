@@ -1,4 +1,4 @@
-<mvc:View controllerName="project1.controller.View1" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" 
+<mvc:View controllerName="project1.controller.View2" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" 
 xmlns="sap.m" 
 xmlns:f="sap.f" 
 xmlns:l="sap.ui.layout"
@@ -35,7 +35,7 @@ xmlns:core="sap.ui.core">
                         <Panel id="datePanel">
                            <Label text="Data inizio" labelFor="DTP2"/>
 		<DateTimePicker
-			id="DTP2"
+			id="dataI"
 			showCurrentDateButton="true"
 			showCurrentTimeButton="true"
 			value="2022-12-07-09-00-00" valueFormat="yyyy-MM-dd-HH-mm-ss" displayFormat="long"
@@ -47,7 +47,7 @@ xmlns:core="sap.ui.core">
                         <Panel id="datePanel2">
                            <Label text="Data fine" labelFor="DTP3"/>
 		<DateTimePicker
-			id="DTP3"
+			id="dataF"
 			showCurrentDateButton="true"
 			showCurrentTimeButton="true"
 			value="2022-12-07-09-00-00" valueFormat="yyyy-MM-dd-HH-mm-ss" displayFormat="long"
@@ -59,7 +59,7 @@ xmlns:core="sap.ui.core">
 					<l:VerticalLayout width="100%">
 		<Label text="Note" labelFor="note" />
 		<Input class="sapUiMediumMarginBottom"
-			id="productInput"
+			id="note"
 			placeholder="Note">
 		</Input>
 	</l:VerticalLayout>
