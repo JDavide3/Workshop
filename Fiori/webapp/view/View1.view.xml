@@ -33,16 +33,16 @@ xmlns:core="sap.ui.core">
                 </headerToolbar>
                 <columns>
                     <Column width="20em">
-                    <Text text="Data inizio"/>
+                    <Text id="dInizio" text="Data inizio"/>
                     </Column>
                    <Column width="20em">
-                   <Text text="Data fine"/>
+                   <Text id="dFine" text="Data fine"/>
                     </Column>
 					 <Column>
-                     <Text text="Note"/>
+                     <Text id="notes" text="Note"/>
                     </Column>
                     <Column>
-                     <Text text="Nome e cognome"/>
+                     <Text id="nc" text="Nome e cognome"/>
                     </Column>
                     <Column hAlign="End">
                         <Button type="Success" press="-----" text="Approva"/>
