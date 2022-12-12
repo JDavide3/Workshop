@@ -33,16 +33,28 @@ xmlns:core="sap.ui.core">
                 </headerToolbar>
                 <columns>
                     <Column width="20em">
+                    <Text text="Data inizio"/>
                     </Column>
                    <Column width="20em">
+                   <Text text="Data fine"/>
                     </Column>
 					 <Column>
+                     <Text text="Note"/>
+                    </Column>
+                    <Column>
+                     <Text text="Nome e cognome"/>
                     </Column>
                     <Column hAlign="End">
                         <Button type="Success" press="-----" text="Approva"/>
                     </Column>
                     <Column hAlign="Begin">
                         <Button type="Negative" press="-----" text="Rifiuta"/>
+                    </Column>
+                     <Column>
+                    </Column>
+                    <Column>
+                    </Column>
+                    <Column>
                     </Column>
                 </columns>
             </Table>
