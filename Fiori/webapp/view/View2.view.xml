@@ -55,6 +55,16 @@ xmlns:core="sap.ui.core">
 			class="sapUiSmallMarginBottom"/>
                         </Panel>
                     </Column>
+                    <Column>
+					<l:VerticalLayout width="100%">
+		<Label text="Nome e Cognome" labelFor="note" />
+		<Input class="sapUiMediumMarginBottom"
+			id="nomeCognome"
+			placeholder="Note">
+		</Input>
+        
+	</l:VerticalLayout>
+                    </Column>
 					 <Column>
 					<l:VerticalLayout width="100%">
 		<Label text="Note" labelFor="note" />
@@ -62,13 +72,14 @@ xmlns:core="sap.ui.core">
 			id="note"
 			placeholder="Note">
 		</Input>
+        
 	</l:VerticalLayout>
                     </Column>
                     <Column>
                         <CheckBox text="Giustificato" selected="false" />
                     </Column>
                     <Column hAlign="Begin">
-                        <Button type="Emphasized" press="-----" icon="sap-icon://save" text="Conferma"/>
+                        <Button type="Emphasized" press="onSend" icon="sap-icon://save" text="Conferma"/>
                     </Column>
                 </columns>
             </Table>
