@@ -1,8 +1,4 @@
-<mvc:View controllerName="project1.controller.View1" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" 
-xmlns="sap.m" 
-xmlns:f="sap.f" 
-xmlns:l="sap.ui.layout"
-xmlns:core="sap.ui.core">
+<mvc:View controllerName="project1.controller.View1" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:f="sap.f" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:si="sap.suite.ui.commons.statusindicator">
     <f:DynamicPage id="dynamicPageId" headerExpanded="{/headerExpanded}" toggleHeaderOnTitleClick="{/titleClickable}">
         <!-- DynamicPage Title -->
         <f:title>
@@ -32,29 +28,39 @@ xmlns:core="sap.ui.core">
                     </Toolbar>
                 </headerToolbar>
                 <columns>
-                    <Column width="20em">
-                    <Text id="dInizio" text="Data inizio"/>
+                    <Column >
+                        <Text id="dInizio" text="19/12/2022" />
                     </Column>
-                   <Column width="20em">
-                   <Text id="dFine" text="Data fine"/>
-                    </Column>
-					 <Column>
-                     <Text id="notes" text="Note"/>
+                    <Column >
+                        <Text id="dFine" text="22/12/2022" />
                     </Column>
                     <Column>
-                     <Text id="nc" text="Nome e cognome"/>
+                        <Text id="notes" text="Ferie" />
                     </Column>
-                    <Column hAlign="End">
-                        <Button type="Success" press="-----" text="Approva"/>
+                    <Column>
+                        <Text id="nc" text="Riccardo Rottino" />
+                    </Column>
+                    <Column>
+                        <si:StatusIndicator id="indicator11" width="510px" height="70px" viewBox="0 1 510 82" class="sapUiSmallMargin">
+                            <si:ShapeGroup>
+                                <si:Rectangle x="2" y="2" width="500" height="90" strokeWidth="8" strokeColor="black" fillingType="Linear" />
+                            </si:ShapeGroup>
+                            <si:propertyThresholds>
+                                <si:PropertyThreshold fillColor="Critical" toValue="100" />
+                                <si:PropertyThreshold fillColor="Error" toValue="66" />
+                                <si:PropertyThreshold fillColor="Good" toValue="33" />
+                            </si:propertyThresholds>
+                        </si:StatusIndicator>
+                    </Column>
+                    <Column>
+                        <Text id="na" text="Taken 55%" />
+                    </Column>
+                     
+                     <Column hAlign="End">
+                        <Button type="Success" press="-----" text="Approva" />
                     </Column>
                     <Column hAlign="Begin">
-                        <Button type="Negative" press="-----" text="Rifiuta"/>
-                    </Column>
-                     <Column>
-                    </Column>
-                    <Column>
-                    </Column>
-                    <Column>
+                        <Button type="Negative" press="-----" text="Rifiuta" />
                     </Column>
                 </columns>
             </Table>
