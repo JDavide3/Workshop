@@ -12,7 +12,7 @@
                 <f:actions>
                     <Button text="Visualizza tutti" type="Emphasized" icon="sap-icon://show" press="---" />
                     <Button text="Da approvare" type="Critical" press="---" />
-                     <Button text="Esporta" type="Neutral" icon="sap-icon://action" press="---" />
+                    <Button text="Esporta" type="Neutral" icon="sap-icon://action" press="---" />
                 </f:actions>
                 <f:navigationActions />
             </f:DynamicPageTitle>
@@ -25,21 +25,21 @@
             <Table noDataText="" id="tabManager" sticky="HeaderToolbar,ColumnHeaders" inset="false" class="sapFDynamicPageAlignContent" width="auto">
                 <headerToolbar>
                     <Toolbar>
-                        <Title text="Gestione attività" level="H1" />
+                        <Title text="Gestione attività" level="H2" />
                     </Toolbar>
                 </headerToolbar>
                 <columns>
-                    <Column >
-                        <Text id="dInizio" text="19/12/2022" />
-                    </Column>
-                    <Column >
-                        <Text id="dFine" text="22/12/2022" />
+                    <Column>
+                        <Text text="Data Inizio" />
                     </Column>
                     <Column>
-                        <Text id="notes" text="Ferie" />
+                        <Text text="Ora Inizio" />
                     </Column>
                     <Column>
-                        <Text id="nc" text="Riccardo Rottino" />
+                        <Text text="Data Fine" />
+                    </Column>
+                    <Column>
+                        <Text text="Ora Fine" />
                     </Column>
                     <Column>
                         <si:StatusIndicator id="indicator11" width="510px" height="70px" viewBox="0 1 510 82" class="sapUiSmallMargin">
@@ -56,14 +56,26 @@
                     <Column>
                         <Text id="na" text="Taken 55%" />
                     </Column>
-                     
-                     <Column hAlign="End">
+
+                    <Column hAlign="End">
                         <Button type="Success" press="-----" text="Approva" />
                     </Column>
                     <Column hAlign="Begin">
                         <Button type="Negative" press="-----" text="Rifiuta" />
                     </Column>
                 </columns>
+                <items>
+                    <ColumnListItem vAlign="Middle">
+                        <cells>
+                            <Text text="{Prenotazioni>DataInizio}" />
+                            <Text text="{Prenotazioni>DataFine}" />
+                            <Text text="{Prenotazioni>OraInizio}" />
+                            <Text text="{Prenotazioni>OraFIne}" />
+                            <Button text="Approva" type="Success" width="7em" class="sapUiSmallMarginEnd" />
+                            <Button text="Rifiuta" type="Negative" width="7em" class="sapUiSmallMarginEnd" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
             </Table>
         </f:content>
     </f:DynamicPage>
