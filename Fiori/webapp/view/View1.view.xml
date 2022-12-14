@@ -71,6 +71,7 @@
                             <Text text="{Prenotazioni>DataFine}" />
                             <Text text="{Prenotazioni>OraInizio}" />
                             <Text text="{Prenotazioni>OraFIne}" />
+                            <Text text="{Prenotazioni>infoDipendente}" />
                             <Button text="Approva" type="Success" width="7em" class="sapUiSmallMarginEnd" />
                             <Button text="Rifiuta" type="Negative" width="7em" class="sapUiSmallMarginEnd" />
                         </cells>
