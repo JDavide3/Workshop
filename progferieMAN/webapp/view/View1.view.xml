@@ -1,0 +1,102 @@
+<mvc:View controllerName="progferieMAN.controller.View1" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:f="sap.f" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:si="sap.suite.ui.commons.statusindicator">
+    <f:DynamicPage id="dynamicPageId" headerExpanded="{/headerExpanded}" toggleHeaderOnTitleClick="{/titleClickable}">
+        <!-- DynamicPage Title -->
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="Manager" />
+                </f:heading>
+                <f:content>
+                    <OverflowToolbar />
+                </f:content>
+                <f:actions>
+                    <Button text="Visualizza tutti" type="Emphasized" icon="sap-icon://show" press="---" />
+                    <Button text="Da approvare" type="Critical" press="---" />
+                    <Button text="Esporta" type="Neutral" icon="sap-icon://action" press="---" />
+                </f:actions>
+                <f:navigationActions />
+            </f:DynamicPageTitle>
+        </f:title>
+        <!-- DynamicPage Header -->
+        <f:header>
+            <f:DynamicPageHeader pinnable="true" />
+        </f:header>
+        <f:content>
+            <Table noDataText="" id="tabManager" sticky="HeaderToolbar,ColumnHeaders" inset="false" class="sapFDynamicPageAlignContent" width="auto">
+                <headerToolbar>
+                    <Toolbar>
+                        <Title text="Gestione attività" level="H2" />
+                    </Toolbar>
+                </headerToolbar>
+                <columns>
+                    <Column>
+                        <Text text="Data Inizio" />
+                    </Column>
+                    <Column>
+                        <Text text="Ora Inizio" />
+                    </Column>
+                    <Column>
+                        <Text text="Data Fine" />
+                    </Column>
+                    <Column>
+                        <Text text="Ora Fine" />
+                    </Column>
+                   <!-- <Column>
+                        <si:StatusIndicator id="indicator11" width="510px" height="70px" viewBox="0 1 510 82" class="sapUiSmallMargin">
+                            <si:ShapeGroup>
+                                <si:Rectangle x="2" y="2" width="500" height="90" strokeWidth="8" strokeColor="black" fillingType="Linear" />
+                            </si:ShapeGroup>
+                            <si:propertyThresholds>
+                                <si:PropertyThreshold fillColor="Critical" toValue="100" />
+                                <si:PropertyThreshold fillColor="Error" toValue="66" />
+                                <si:PropertyThreshold fillColor="Good" toValue="33" />
+                            </si:propertyThresholds>
+                        </si:StatusIndicator>
+                    </Column> -->
+                    <Column>
+                    <Text text="Nome e Cognome" />
+                    </Column>
+                    <Column>
+                    </Column>
+                    
+                    <Column hAlign="End">
+                        <!-- <Button type="Success" press="-" text="Approva" /> -->
+                    </Column>
+                    <Column hAlign="Begin">
+                        <!-- <Button type="Negative" press="-" text="Rifiuta" /> -->
+                    </Column>
+                </columns>
+                <items>
+                   
+                    <ColumnListItem vAlign="Middle">
+                        <cells>
+                            <Text text="{Books>DataInizio}" />
+                            <Text text="{Books>OraInizio}" />
+                            <Text text="{Books>DataFIne}" />
+                            <Text text="{Books>OraFine}" />
+                            <Text text="{Books>infoDipendente}" />
+                             <si:StatusIndicator id="indicator1" width="510px" height="70px" viewBox="0 1 510 82" class="sapUiSmallMargin">
+                            <si:ShapeGroup>
+                                <si:Rectangle x="2" y="2" width="500" height="90" strokeWidth="8" strokeColor="black" fillingType="Linear" />
+                            </si:ShapeGroup>
+                            <si:propertyThresholds>
+                                <si:PropertyThreshold fillColor="Critical" toValue="100" />
+                                <si:PropertyThreshold fillColor="Error" toValue="66" />
+                                <si:PropertyThreshold fillColor="Good" toValue="33" />
+                            </si:propertyThresholds>
+                        </si:StatusIndicator>
+                        <HBox alignContent="Center">
+                         <Text id="tkn" text="Taken 55%" />
+                         </HBox>
+                            <HBox>
+                                <Button type="Success" icon="sap-icon://accept" press="onSave"/> <!--visible="{Books>isEdit}"-->
+                                <Button type="Negative" icon="sap-icon://decline" press="onEdit"/> <!--visible="{= ${Books>isEdit}===true?false:true}"-->
+                            </HBox>
+                        </cells>
+                    </ColumnListItem>
+                
+                </items>
+            </Table>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
