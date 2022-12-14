@@ -1,9 +1,11 @@
-<mvc:View controllerName="progferieDIP.controller.View2" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:f="sap.f" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core">
+<mvc:View controllerName="progferieDIP.controller.View2" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" 
+xmlns="sap.m" 
+xmlns:f="sap.f" 
+xmlns:l="sap.ui.layout"
+xmlns:core="sap.ui.core">
     <f:DynamicPage id="dynamicPageId" headerExpanded="{/headerExpanded}" toggleHeaderOnTitleClick="{/titleClickable}">
         <!-- DynamicPage Title -->
-     
         <f:title>
-
             <f:DynamicPageTitle>
                 <f:heading>
                     <Title text="Gestione Ferie e Permessi" />
@@ -22,78 +24,64 @@
             <f:DynamicPageHeader pinnable="true" />
         </f:header>
         <f:content>
-            <Table noDataText="" id="tabella" sticky="HeaderToolbar,ColumnHeaders" inset="false" width="auto">
+            <Table noDataText="" id="tabella" sticky="HeaderToolbar,ColumnHeaders" inset="false"  width="auto">
                 <headerToolbar>
                     <Toolbar height="60px">
-                        <l:VerticalLayout>
-                            <Title text="Gestione Ferie e Permessi" level="H2" class="sapUiMediumMarginTop" />
-                        </l:VerticalLayout>
+                    <l:VerticalLayout>
+                        <Title text="Gestione Ferie e Permessi" level="H2" class="sapUiMediumMarginTop" />
+                    </l:VerticalLayout>
                     </Toolbar>
                 </headerToolbar>
                 <columns>
                     <Column width="20em">
-                        <Panel id="datePanel1">
-                            <Label text="Data inizio" labelFor="DI" />
-                            <DatePicker id="dataInizio" value="2014-03-26" valueFormat="yyyy-MM-dd" displayFormat="long" change="handleChange" class="sapUiSmallMarginBottom" />
-                        </Panel>
-                    </Column>
-
-                    <Column width="20em">
-                        <Panel id="OI">
-                            <Label text="Ora inizio" labelFor="OI" />
-                            <TimePicker
-                                id="oraInizio"
-                                value="{/timePickers/TP1/value}"
-                                valueFormat="{/timePickers/TP1/format}"
-                                displayFormat="{/timePickers/TP1/format}"
-                                change="handleChange"
-                                maskMode="{= ${/maskMode/state} ? 'On' : 'Off'}"
-                                placeholder="{/timePickers/TP1/placeholder}"
-                                class="sapUiSmallMarginBottom"
-                            />
-                        </Panel>
-                    </Column>
-
-                    <Column width="20em">
                         <Panel id="datePanel">
-                            <Label text="Data Fine" labelFor="DF" />
-                            <DatePicker id="dataFine" value="2014-03-26" valueFormat="yyyy-MM-dd" displayFormat="long" change="handleChange" class="sapUiSmallMarginBottom" />
+                           <Label text="Data inizio" labelFor="DTP2"/>
+		<DateTimePicker
+			id="dataI"
+			showCurrentDateButton="true"
+			showCurrentTimeButton="true"
+			value="" valueFormat="yyyy-MM-ddTHH:mm:ss" displayFormat="long"
+			change="handleChange"
+			class="sapUiSmallMarginBottom"/>
                         </Panel>
                     </Column>
-
-                    <Column width="20em">
-                        <Panel id="OF">
-                            <Label text="Ora Fine" labelFor="OF" />
-                            <TimePicker
-                                id="oraFine"
-                                value="{/timePickers/TP1/value}"
-                                valueFormat="{/timePickers/TP1/format}"
-                                displayFormat="{/timePickers/TP1/format}"
-                                change="handleChange"
-                                maskMode="{= ${/maskMode/state} ? 'On' : 'Off'}"
-                                placeholder="{/timePickers/TP1/placeholder}"
-                                class="sapUiSmallMarginBottom"
-                            />
+                   <Column width="20em">
+                        <Panel id="datePanel2">
+                           <Label text="Data fine" labelFor="DTP3"/>
+		<DateTimePicker
+			id="dataF"
+			showCurrentDateButton="true"
+			showCurrentTimeButton="true"
+			value="" valueFormat="yyyy-MM-ddTHH:mm:ss" displayFormat="long"
+			change="handleChange"
+			class="sapUiSmallMarginBottom"/>
                         </Panel>
                     </Column>
-
                     <Column>
-                        <l:VerticalLayout width="100%">
-                            <Label text="Nome e Cognome" labelFor="note" />
-                            <Input class="sapUiMediumMarginBottom" id="nomeCognome" placeholder="Note" />
-                        </l:VerticalLayout>
+					<l:VerticalLayout width="100%">
+		<Label text="Nome e Cognome" labelFor="note" />
+		<Input class="sapUiMediumMarginBottom"
+			id="nomeCognome"
+			placeholder="Note">
+		</Input>
+        
+	</l:VerticalLayout>
                     </Column>
-                    <Column>
-                        <l:VerticalLayout width="100%">
-                            <Label text="Note" labelFor="note" />
-                            <Input class="sapUiMediumMarginBottom" id="note" placeholder="Note" />
-                        </l:VerticalLayout>
+					 <Column>
+					<l:VerticalLayout width="100%">
+		<Label text="Note" labelFor="note" />
+		<Input class="sapUiMediumMarginBottom"
+			id="note"
+			placeholder="Note">
+		</Input>
+        
+	</l:VerticalLayout>
                     </Column>
                     <Column hAlign="Begin">
-                        <l:HorizontalLayout class="sapUiResponsiveMargin">
-                            <Button type="Emphasized" width="4em" icon="sap-icon://edit" class="sapUiSmallMarginEnd" />
-                            <Button type="Success" press="onConfirm" width="4em" icon="sap-icon://save" class="sapUiSmallMarginEnd" />
-                            <Button type="Negative" width="4em" icon="sap-icon://delete" class="sapUiSmallMarginEnd" />
+                      <l:HorizontalLayout class="sapUiResponsiveMargin">
+                            <Button type="Emphasized" width="4em" icon="sap-icon://edit" class="sapUiSmallMarginEnd"/>
+                            <Button type="Success" press="onConfirm" width="4em" icon="sap-icon://save" class="sapUiSmallMarginEnd"/>
+                            <Button type="Negative" width="4em" icon="sap-icon://delete" class="sapUiSmallMarginEnd"/>
                         </l:HorizontalLayout>
                     </Column>
                 </columns>
