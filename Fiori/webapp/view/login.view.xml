@@ -1,0 +1,27 @@
+<mvc:View xmlns:form="sap.ui.layout.form" controllerName="project1.controller.login" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
+    <Shell id="shell">
+        <App id="app">
+            <pages>
+                <Page id="page" title="{i18n>titoloLogin}">
+                    <content>
+                        <form:SimpleForm editable="true" layout="ResponsiveGridLayout" adjustLabelSpan="false" labelSpanL="4" labelSpanM="4" labelSpanS="12" columnsL="1" columnsM="1" emptySpanL="4" emptySpanM="4"> 
+                        <form:content>
+                        <Label text="Username" required="true"></Label>
+                        <Input id="inp_usernameId"></Input>
+                        <Label text="Password" required="true"></Label>
+                        <Input id="inp_passwordId" type="Password"></Input>
+                        </form:content>
+                        </form:SimpleForm>
+                    </content>
+                    <footer>
+                    <Bar design="Footer">
+                    <contentRight>
+                    <Button text="Login" type="Accept" press="onLoginUser"></Button>
+                    </contentRight>
+                    </Bar>
+                    </footer>
+                </Page>
+            </pages>
+        </App>
+    </Shell>
+</mvc:View>

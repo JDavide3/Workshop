@@ -94,20 +94,34 @@
       },
       "routes": [
         {
-          "name": "RouteView1",
+          "name": "Routelogin",
           "pattern": ":?query:",
           "target": [
-            "TargetView1"
+            "Targetlogin"
+          ]
+        },
+        {
+          "name": "View2",
+          "pattern": "View2",
+          "target": [
+            "View2"
           ]
         }
       ],
       "targets": {
-        "TargetView1": {
+        "Targetlogin": {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": false,
-          "viewId": "View1",
-          "viewName": "View1"
+          "viewId": "login",
+          "viewName": "login"
+        },
+        "View2": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "View2",
+          "viewName": "View2"
         }
       }
     },
