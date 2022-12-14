@@ -82,7 +82,7 @@ sap.ui.define([
                             });
                         }
                     }
-                });
+                });     
             },
 
             onBack: function () {
