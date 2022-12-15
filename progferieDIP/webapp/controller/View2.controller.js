@@ -86,9 +86,55 @@ sap.ui.define([
                 });
             },
 
-            onEdit: function (oModel) 
-            {
+            onUpdate: function (oEvent) {
+                let that = this;
+                let obj = oEvent.getSource().getBindingContext("Prenotazioni").getObject();
+                MessageBox.confirm("Confermare la modifica?", {
+                    onClose: async function (oAction) {
+                        let oModel;
+                        if (oAction === 'OK') {
+                            const today = new Date();
+                            const anno = today.getFullYear();
+                            let mese = today.getMonth() + 1; // Months start at 0!
+                            let giorno = today.getDate();
+                            let ore = today.getHours();
+                            let minuti = today.getMinutes();
+                            if (minuti < 10) { minuti = "0" + minuti }
+                            if (ore < 10) { ore = "0" + ore }
+                            if (giorno < 10) { giorno = "0" + giorno }
+                            if (mese < 10) { mese = "0" + mese }
 
+                            const formattedToday = anno + "-" + mese + "-" + giorno + "T" + ore + ":" + minuti + "Z";
+                            oModel = {
+                                "dataPrenotazione": formattedToday,
+                                "dataInizio": obj.dataInizio,
+                                "dataFine": obj.dataFine
+                            };
+                        }
+                        jQuery.ajax({
+                            type: "PUT",
+                            contentType: "application/json",
+                            url: "/progferieDIP/db/odata/v4/CatalogService/Prenotazioni(" + obj.ID + ")",
+                            dataType: "json",
+                            data: JSON.stringify(oModel),
+                            async: false,
+                            success: function () {
+                                that.getView().setBusy(false);
+                                MessageBox.success("Operazione eseguita!", {
+                                    onClose: function () {
+                                        that.onAjaxSearch();
+                                        //that.onCloseDialog();
+                                    }
+                                });
+                            },
+                            error: function (oError) {
+                                MessageBox.error("Errore di servizio");
+                                console.log(oError);
+                                that.getView().setBusy(false);
+                            }
+                        });
+                    }
+                });
             },
 
             onAjaxSearch: function () {

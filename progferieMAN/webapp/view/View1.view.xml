@@ -11,7 +11,7 @@
                 </f:content>
                 <f:actions>
                     <Button text="Visualizza tutti" type="Emphasized" icon="sap-icon://show" press="---" />
-                    <Button text="Da approvare" type="Critical" press="---" />
+                    <Button text="Da approvare" type="Critical" press="onPending" />
                     <Button text="Esporta" type="Neutral" icon="sap-icon://action" press="---" />
                 </f:actions>
                 <f:navigationActions />
@@ -22,7 +22,7 @@
             <f:DynamicPageHeader pinnable="true" />
         </f:header>
         <f:content>
-            <Table noDataText="" id="tabManager" sticky="HeaderToolbar,ColumnHeaders" inset="false" class="sapFDynamicPageAlignContent" width="auto">
+            <Table noDataText="" id="tabManager" sticky="HeaderToolbar,ColumnHeaders" items="{Prenotazioni>/}" inset="false" class="sapFDynamicPageAlignContent" width="auto">
                 <headerToolbar>
                     <Toolbar>
                         <Title text="Gestione attività" level="H2" />
@@ -30,71 +30,65 @@
                 </headerToolbar>
                 <columns>
                     <Column>
-                        <Text text="Data Inizio" />
+                        <Text text="Data Prenotazione" />
                     </Column>
                     <Column>
-                        <Text text="Ora Inizio" />
+                        <Text text="Data Inizio" />
                     </Column>
                     <Column>
                         <Text text="Data Fine" />
                     </Column>
                     <Column>
-                        <Text text="Ora Fine" />
-                    </Column>
-                   <!-- <Column>
-                        <si:StatusIndicator id="indicator11" width="510px" height="70px" viewBox="0 1 510 82" class="sapUiSmallMargin">
-                            <si:ShapeGroup>
-                                <si:Rectangle x="2" y="2" width="500" height="90" strokeWidth="8" strokeColor="black" fillingType="Linear" />
-                            </si:ShapeGroup>
-                            <si:propertyThresholds>
-                                <si:PropertyThreshold fillColor="Critical" toValue="100" />
-                                <si:PropertyThreshold fillColor="Error" toValue="66" />
-                                <si:PropertyThreshold fillColor="Good" toValue="33" />
-                            </si:propertyThresholds>
-                        </si:StatusIndicator>
-                    </Column> -->
-                    <Column>
-                    <Text text="Nome e Cognome" />
+                        <Text text="Richiedente" />
                     </Column>
                     <Column>
+                        <Text text="Status" />
                     </Column>
-                    
-                    <Column hAlign="End">
-                        <!-- <Button type="Success" press="-" text="Approva" /> -->
+                    <Column>
+                        <Text text="Azioni" />
                     </Column>
-                    <Column hAlign="Begin">
-                        <!-- <Button type="Negative" press="-" text="Rifiuta" /> -->
-                    </Column>
+                    <Column />
                 </columns>
                 <items>
-                   
                     <ColumnListItem vAlign="Middle">
                         <cells>
-                            <Text text="{Books>DataInizio}" />
-                            <Text text="{Books>OraInizio}" />
-                            <Text text="{Books>DataFIne}" />
-                            <Text text="{Books>OraFine}" />
-                            <Text text="{Books>infoDipendente}" />
-                             <si:StatusIndicator id="indicator1" width="510px" height="70px" viewBox="0 1 510 82" class="sapUiSmallMargin">
-                            <si:ShapeGroup>
-                                <si:Rectangle x="2" y="2" width="500" height="90" strokeWidth="8" strokeColor="black" fillingType="Linear" />
-                            </si:ShapeGroup>
-                            <si:propertyThresholds>
-                                <si:PropertyThreshold fillColor="Critical" toValue="100" />
-                                <si:PropertyThreshold fillColor="Error" toValue="66" />
-                                <si:PropertyThreshold fillColor="Good" toValue="33" />
-                            </si:propertyThresholds>
-                        </si:StatusIndicator>
-                        <HBox alignContent="Center">
-                         <Text id="tkn" text="Taken 55%" />
-                         </HBox>
+                            <l:VerticalLayout>
+                                <Text text="{Prenotazioni>dataPrenotazione}" />
+                            </l:VerticalLayout>
+                            <l:VerticalLayout>
+                                <Text text="{Prenotazioni>dataInizio}" />
+                            </l:VerticalLayout>
+                            <l:VerticalLayout>
+                                <Text text="{Prenotazioni>dataFine}" />
+                            </l:VerticalLayout>
+                            <l:VerticalLayout>
+                                <Text text="{Prenotazioni>createdBy}" />
+                            </l:VerticalLayout>
+                            <si:StatusIndicator id="indicator1" width="510px" height="70px" viewBox="0 1 510 82" class="sapUiSmallMargin">
+                                <si:ShapeGroup>
+                                    <si:Rectangle x="2" y="2" width="500" height="90" strokeWidth="8" strokeColor="black" fillingType="Linear" />
+                                </si:ShapeGroup>
+                                <si:propertyThresholds>
+                                    <si:PropertyThreshold fillColor="Critical" toValue="100" />
+                                    <si:PropertyThreshold fillColor="Error" toValue="66" />
+                                    <si:PropertyThreshold fillColor="Good" toValue="33" />
+                                </si:propertyThresholds>
+                            </si:StatusIndicator>
+                            <HBox alignContent="Center">
+                                <Text id="tkn" text="Taken 55%" />
+                            </HBox>
                             <HBox>
-                                <Button type="Success" icon="sap-icon://accept" press="onSave"/> <!--visible="{Books>isEdit}"-->
-                                <Button type="Negative" icon="sap-icon://decline" press="onEdit"/> <!--visible="{= ${Books>isEdit}===true?false:true}"-->
+                                <l:HorizontalLayout class="sapUiResponsiveMargin">
+                                    <Button type="Success" press="onApprove" text="Approva" icon="sap-icon://thumb-up" class="sapUiSmallMarginEnd" visible="{= ${Prenotazioni>isRejected}===false &amp;&amp; ${Prenotazioni>isApproved}===false}" />
+                                    <Button type="Negative" press="onReject" text="Rifiuta" class="sapUiSmallMarginEnd" icon="sap-icon://thumb-down" visible="{= ${Prenotazioni>isRejected}===false &amp;&amp; ${Prenotazioni>isApproved}===false}" />
+                                     <core:Icon src="sap-icon://thumb-up" id="approvato" class="size1" color="#31ad00" visible="{= ${Prenotazioni>isApproved}===true}">
+                    		</core:Icon>
+                            <core:Icon src="sap-icon://thumb-down" id="rifiutato" class="size1" color="#ad1100" visible="{= ${Prenotazioni>isRejected}===true}">
+                    		</core:Icon>
+                                </l:HorizontalLayout>
                             </HBox>
                         </cells>
                     </ColumnListItem>
-                
                 </items>
             </Table>
         </f:content>
