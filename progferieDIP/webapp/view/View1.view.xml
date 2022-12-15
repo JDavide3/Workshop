@@ -17,7 +17,7 @@
             <f:DynamicPageHeader pinnable="true" />
         </f:header>
         <f:content>
-            <Table noDataText="" id="tabella" sticky="HeaderToolbar,ColumnHeaders" inset="false" width="auto">
+            <Table noDataText="" id="tabella" sticky="HeaderToolbar,ColumnHeaders" inset="false" width="auto" items="{Prenotazioni>/}">
                 <headerToolbar>
                     <Toolbar height="60px">
                         <l:VerticalLayout>
@@ -65,9 +65,7 @@
                         </l:VerticalLayout>
                         <l:VerticalLayout>
                             <Text text="Data Inizio" />
-                            <Panel id="datePanel3">
                             <Text text="{Prenotazioni>dataInizio}" />
-                        </Panel>
                         </l:VerticalLayout>
                         <l:VerticalLayout>
                             <Text text="Data Fine" />
@@ -76,9 +74,9 @@
                         <l:VerticalLayout>
                             <Text text="Stato Richiesta" />
                             <l:HorizontalLayout >
-                            <core:Icon src="sap-icon://thumb-up" class="size1" color="#31ad00" visible="{= ${Prenotazioni>isApproved}===true}">
+                            <core:Icon src="sap-icon://thumb-up" id="approvato" class="size1" color="#31ad00" visible="{= ${Prenotazioni>/isApproved}===false}">
                     		</core:Icon>
-                            <core:Icon src="sap-icon://thumb-down" class="size1" color="#ad1100" visible="{= ${Prenotazioni>isRejected}===true}">
+                            <core:Icon src="sap-icon://thumb-down" id="rifiutato" class="size1" color="#ad1100" visible="{= ${Prenotazioni>isRejected}===true}">
                     		</core:Icon>
                             <core:Icon src="sap-icon://pending" class="size1" color="#d9db35" visible="{= ${Prenotazioni>isRejected}===true}">
                     		</core:Icon>

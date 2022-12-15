@@ -17,7 +17,8 @@ sap.ui.define([
             onInit: function () {
                 this.getView().setModel(new JSONModel());
 
-                this.getOwnerComponent().getRouter().getRoute("RouteView1").attachPatternMatched(this.onAjaxSearch, this)
+                this.getOwnerComponent().getRouter().getRoute("RouteView1").attachPatternMatched(this.onAjaxSearch, this);
+                this.getOwnerComponent().getRouter().getRoute("RouteView1").attachPatternMatched(this.onEdit, this);
             },
 
             onNavigationMatched: function (oEevent) {
@@ -36,12 +37,12 @@ sap.ui.define([
                             let giorno = today.getDate();
                             let ore = today.getHours();
                             let minuti = today.getMinutes();
-                            if(minuti < 10) {minuti = "0"+minuti}
-                            if(ore < 10) {ore = "0"+ore}
-                            if(giorno < 10) {giorno = "0"+giorno}
-                            if(mese < 10) {mese = "0"+mese}
+                            if (minuti < 10) { minuti = "0" + minuti }
+                            if (ore < 10) { ore = "0" + ore }
+                            if (giorno < 10) { giorno = "0" + giorno }
+                            if (mese < 10) { mese = "0" + mese }
 
-                            const formattedToday = anno+"-"+mese+"-"+giorno+"T"+ore+":"+minuti+"Z";
+                            const formattedToday = anno + "-" + mese + "-" + giorno + "T" + ore + ":" + minuti + "Z";
 
                             console.log(formattedToday);
                             dataInizio += "Z";
@@ -58,7 +59,7 @@ sap.ui.define([
                                 "infoDipendente": "Dip",
                                 "infoManager": "Man"
                             }
-        
+
                             let aData = jQuery.ajax({
                                 type: "POST",
                                 contentType: "application/json",
@@ -71,8 +72,6 @@ sap.ui.define([
                                     MessageBox.success("Operazione eseguita!", {
                                         onClose: function () {
                                             that.onAjaxSearch();
-                                            //that.onCloseDialog();
-                                            that.getOwnerComponent().getRouter().navTo("RouteMaster");
                                         }
                                     });
                                 },
@@ -84,42 +83,69 @@ sap.ui.define([
                             });
                         }
                     }
-                });     
+                });
             },
 
-            onBack: function () {
-                this.getOwnerComponent().getRouter().navTo("RouteMaster")
-            },
-
-            onAjaxSearch: function () 
+            onEdit: function (oModel) 
             {
+
+            },
+
+            onAjaxSearch: function () {
+                let that = this;
                 let aData = jQuery.ajax({
                     type: "GET",
                     contentType: "application/json",
                     url: "/progferieDIP/db/odata/v4/CatalogService/Prenotazioni",
                     dataType: "json",
                     async: false,
-                    success: function () {
-                        this.getView().setBusy(false);
-                        MessageBox.success("Operazione eseguita!", {
-                            onClose: function () {
-                                //that.onAjaxSearch();
-                                //that.onCloseDialog();
-                                this.getOwnerComponent().getRouter().navTo("RouteMaster");
-                            }
-                        });
+                    success: function (data, textStatus, jqXHR, oResults) {
+                        that.getView().setModel(new JSONModel(data.value), "Prenotazioni");
+                        that.getView().setBusy(false);
+                        that.getView().getModel("Prenotazioni").getData();
+                        //let data1 = that.getView().getModel("Prenotazioni").dataInizio;
+                        //console.log(data1);
                     },
                     error: function (oError) {
                         MessageBox.error("Errore del servizio!");
                         console.log(oError);
-                        //that.getView().setBusy(false);
+                        that.getView().setBusy(false);
                     }
                 });
             }
         });
+    }
+)
+/*
+onEdit: function(oEvent) {
+    var obj = oEvent.getSource().getBindingContext("Prenotazioni").getObject();
+    obj.isApproved = true;
+    this.getView().getModel("Prenotazioni").refresh();
+},
 
 
+onSave: function(oEvent) {
+    var obj = oEvent.getSource().getBindingContext("Prenotazioni").getObject();
+    obj.isApproved = false;
+    this.getView().getModel("Prenotazioni").refresh();
+    var that=this;
+    MessageBox.confirm("Procedere con la modifica?",{
+        onClose: function (oAction){
+            if(oAction==="OK"){
+                var odataModel=new ODataModel("/progferieDIP/db/odata/v4/CatalogService/Prenotazioni");
+                odataModel.update("/Prenotazioni(guid'"+obj.ID+"')",{
+                    "isApproved":obj.isApproved;
+                },{
+                    success: function(oResults){
+                        MessageBox.success("Dati modificati correttamente");
+                    },
+                    error: function(oError){
+                        MessageBox.error("Errore nella modifica dei dati");
+                    }
+                })
+            }
+            that.getView().getModel("Prenotazioni").refresh();
+        }
     });
 
-
-
+},*/
