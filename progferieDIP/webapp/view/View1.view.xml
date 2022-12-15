@@ -29,54 +29,58 @@
                     <Column width="20em">
                         <Panel id="datePanel">
                             <Label text="Data inizio" labelFor="DTP2" />
-                            <DateTimePicker id="dataI" showCurrentDateButton="true" showCurrentTimeButton="true" value="" valueFormat="yyyy-MM-ddTHH:mm:ss" change="handleChange" class="sapUiSmallMarginBottom" />
+                            <DateTimePicker id="dataI" placeholder="Inserisci..." showCurrentDateButton="true" showCurrentTimeButton="true" value="" valueFormat="yyyy-MM-ddTHH:mm:ss" change="handleChange" class="sapUiSmallMarginBottom" />
                         </Panel>
                     </Column>
                     <Column width="20em">
                         <Panel id="datePanel2">
                             <Label text="Data fine" labelFor="DTP3" />
-                            <DateTimePicker id="dataF" showCurrentDateButton="true" showCurrentTimeButton="true" value="" valueFormat="yyyy-MM-ddTHH:mm:ss" change="handleChange" class="sapUiSmallMarginBottom" />
+                            <DateTimePicker id="dataF" placeholder="Inserisci..." showCurrentDateButton="true" showCurrentTimeButton="true" value="" valueFormat="yyyy-MM-ddTHH:mm:ss" change="handleChange" class="sapUiSmallMarginBottom" />
                         </Panel>
                     </Column>
-                    <Column>
-                        <l:HorizontalLayout class="sapUiResponsiveMargin">
+                    <Column >
+                    <l:HorizontalLayout class="sapUiResponsiveMargin">
                             <Button type="Success" press="onConfirm" width="4em" icon="sap-icon://save" class="sapUiSmallMarginEnd" />
-                        </l:HorizontalLayout>
+                        </l:HorizontalLayout></Column>
+                    <Column hAlign="Begin">
+                        
                     </Column>
-                    <Column hAlign="Begin" />
-                    <Column />
-                    <Column />
+                    <Column/>
+                    <Column/>
                 </columns>
                 <items>
                     <ColumnListItem vAlign="Middle">
                         <cells>
-                            <l:VerticalLayout>
-                                <Text text="Data Prenotazione" />
-                                <Text text="{Prenotazioni>dataPrenotazione}" />
-                            </l:VerticalLayout>
-                            <l:VerticalLayout>
-                                <Text text="Data Inizio" />
-                                <Input value="{Prenotazioni>dataInizio}" enabled="{= ${Prenotazioni>isRejected}===false &amp;&amp; ${Prenotazioni>isApproved}===false}" />
-                            </l:VerticalLayout>
-                            <l:VerticalLayout>
-                                <Text text="Data Fine" />
-                                <Input value="{Prenotazioni>dataFine}" enabled="{= ${Prenotazioni>isRejected}===false &amp;&amp; ${Prenotazioni>isApproved}===false}" />
-                            </l:VerticalLayout>
-                            <l:VerticalLayout>
-                                <Text text="Richiedente" />
-                                <Text text="{Prenotazioni>createdBy}" />
-                            </l:VerticalLayout>
-                            <l:VerticalLayout>
-                                <Text text="Stato Richiesta" />
-                                <l:HorizontalLayout>
-                                    <core:Icon src="sap-icon://thumb-up" id="approvato" class="size1" color="#31ad00" visible="{= ${Prenotazioni>isApproved}===true}" />
-                                    <core:Icon src="sap-icon://thumb-down" id="rifiutato" class="size1" color="#ad1100" visible="{= ${Prenotazioni>isRejected}===true}" />
-                                    <core:Icon src="sap-icon://pending" class="size1" color="#d9db35" visible="{= ${Prenotazioni>isRejected}===false &amp;&amp; ${Prenotazioni>isApproved}===false}" />
-                                </l:HorizontalLayout>
-                            </l:VerticalLayout>
-                            <HBox>
-                                <Button type="Emphasized" press="onUpdate" width="4em" icon="sap-icon://edit" class="sapUiSmallMarginEnd" visible="{= ${Prenotazioni>isRejected}===false &amp;&amp; ${Prenotazioni>isApproved}===false}" />
-                            </HBox>
+                        <l:VerticalLayout>
+                            <Text text="Data Prenotazione" />
+                            <Text text="{Prenotazioni>dataPrenotazione}" />
+                        </l:VerticalLayout>
+                        <l:VerticalLayout>
+                            <Text text="Data Inizio" />
+                            <Input value="{Prenotazioni>dataInizio}" enabled="{= ${Prenotazioni>isRejected}===false &amp;&amp; ${Prenotazioni>isApproved}===false}"/>
+                        </l:VerticalLayout>
+                        <l:VerticalLayout>
+                            <Text text="Data Fine" />
+                            <Input value="{Prenotazioni>dataFine}" enabled="{= ${Prenotazioni>isRejected}===false &amp;&amp; ${Prenotazioni>isApproved}===false}"/>
+                        </l:VerticalLayout>
+                        <l:VerticalLayout>
+                            <Text text="Richiedente" />
+                            <Text text="{Prenotazioni>createdBy}"/>
+                        </l:VerticalLayout>
+                        <l:VerticalLayout>
+                            <Text text="Stato Richiesta" />
+                            <l:HorizontalLayout >
+                            <core:Icon src="sap-icon://thumb-up" id="approvato" class="size1" color="#31ad00" visible="{= ${Prenotazioni>isApproved}===true}">
+                    		</core:Icon>
+                            <core:Icon src="sap-icon://thumb-down" id="rifiutato" class="size1" color="#ad1100" visible="{= ${Prenotazioni>isRejected}===true}">
+                    		</core:Icon>
+                            <core:Icon src="sap-icon://pending" class="size1" color="#d9db35" visible="{= ${Prenotazioni>isRejected}===false &amp;&amp; ${Prenotazioni>isApproved}===false}">
+                    		</core:Icon>
+                            </l:HorizontalLayout>
+                        </l:VerticalLayout>
+                        <HBox>
+                        <Button type="Emphasized" press="onUpdate" width="4em" icon="sap-icon://edit" class="sapUiSmallMarginEnd" visible="{= ${Prenotazioni>isRejected}===false &amp;&amp; ${Prenotazioni>isApproved}===false}"/>
+                        </HBox>
                             <HBox>
                                 <!--<Button type="Success" icon="sap-icon://accept" press="onSave" />-->
                                 <!--visible="{Books>isEdit}"-->
