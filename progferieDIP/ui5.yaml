@@ -2,7 +2,7 @@
 
 specVersion: "2.5"
 metadata:
-  name: progferie
+  name: progferieDIP
 type: application
 server:
   customMiddleware:

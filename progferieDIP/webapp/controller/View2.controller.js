@@ -17,7 +17,7 @@ sap.ui.define([
             onInit: function () {
                 this.getView().setModel(new JSONModel());
 
-                //this.getOwnerComponent().getRouter().getRoute("Inserisci").attachPatternMatched(this.onNavigationMatched, this)
+                this.getOwnerComponent().getRouter().getRoute("RouteView1").attachPatternMatched(this.onAjaxSearch, this)
             },
 
             onNavigationMatched: function (oEevent) {
@@ -36,7 +36,10 @@ sap.ui.define([
                             let giorno = today.getDate();
                             let ore = today.getHours();
                             let minuti = today.getMinutes();
-                            let secondi = today.getSeconds();
+                            if(minuti < 10) {minuti = "0"+minuti}
+                            if(ore < 10) {ore = "0"+ore}
+                            if(giorno < 10) {giorno = "0"+giorno}
+                            if(mese < 10) {mese = "0"+mese}
 
                             const formattedToday = anno+"-"+mese+"-"+giorno+"T"+ore+":"+minuti+"Z";
 
@@ -47,7 +50,6 @@ sap.ui.define([
                             console.log(dataFine);
 
                             let oModel = {
-                                "prId": 2,
                                 "dataPrenotazione": formattedToday,
                                 "dataInizio": dataInizio,
                                 "dataFine": dataFine,
@@ -69,7 +71,7 @@ sap.ui.define([
                                     MessageBox.success("Operazione eseguita!", {
                                         onClose: function () {
                                             that.onAjaxSearch();
-                                            that.onCloseDialog();
+                                            //that.onCloseDialog();
                                             that.getOwnerComponent().getRouter().navTo("RouteMaster");
                                         }
                                     });
@@ -98,19 +100,19 @@ sap.ui.define([
                     dataType: "json",
                     async: false,
                     success: function () {
-                        that.getView().setBusy(false);
+                        this.getView().setBusy(false);
                         MessageBox.success("Operazione eseguita!", {
                             onClose: function () {
                                 //that.onAjaxSearch();
                                 //that.onCloseDialog();
-                                that.getOwnerComponent().getRouter().navTo("RouteMaster");
+                                this.getOwnerComponent().getRouter().navTo("RouteMaster");
                             }
                         });
                     },
                     error: function (oError) {
                         MessageBox.error("Errore del servizio!");
                         console.log(oError);
-                        that.getView().setBusy(false);
+                        //that.getView().setBusy(false);
                     }
                 });
             }
