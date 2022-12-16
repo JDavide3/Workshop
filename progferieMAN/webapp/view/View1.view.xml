@@ -48,7 +48,6 @@
                     <Column>
                         <Text text="Azioni" />
                     </Column>
-                    <Column />
                 </columns>
                 <items>
                     <ColumnListItem vAlign="Middle">
@@ -75,9 +74,7 @@
                                     <si:PropertyThreshold fillColor="Good" toValue="33" />
                                 </si:propertyThresholds>
                             </si:StatusIndicator>
-                            <HBox alignContent="Center">
-                                <Text id="tkn" text="Taken 55%" />
-                            </HBox>
+                            
                             <HBox>
                                 <l:HorizontalLayout class="sapUiResponsiveMargin">
                                     <Button type="Success" press="onApprove" text="Approva" icon="sap-icon://thumb-up" class="sapUiSmallMarginEnd" visible="{= ${Prenotazioni>isRejected}===false &amp;&amp; ${Prenotazioni>isApproved}===false}" />
@@ -88,6 +85,7 @@
                     		</core:Icon>
                                 </l:HorizontalLayout>
                             </HBox>
+                        
                         </cells>
                     </ColumnListItem>
                 </items>

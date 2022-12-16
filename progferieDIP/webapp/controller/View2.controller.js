@@ -204,7 +204,6 @@ sap.ui.define([
                                         });
                                     },
                                     error: function (oError) {
-                                        MessageBox.error("Errore di servizio");
                                         console.log(oError);
                                         that.getView().setBusy(false);
                                     }
