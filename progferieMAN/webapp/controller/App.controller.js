@@ -5,7 +5,7 @@ sap.ui.define(
     function(BaseController) {
       "use strict";
   
-      return BaseController.extend("progferie.controller.App", {
+      return BaseController.extend("progferieMAN.controller.App", {
         onInit() {
         }
       });

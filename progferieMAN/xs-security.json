@@ -1,5 +1,5 @@
 {
-    "xsappname": "FerieNew-odata-xsuaa",
+    "xsappname": "FerieNewMAN-odata-xsuaa",
     "tenant-mode": "dedicated",
     "description": "Security profile of called application",
     "oauth2-configuration": {

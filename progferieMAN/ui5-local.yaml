@@ -2,7 +2,7 @@
 
 specVersion: "2.5"
 metadata:
-  name: progferie
+  name: progferieMAN
 type: application
 framework:
   name: SAPUI5
@@ -35,5 +35,5 @@ server:
     - name: fiori-tools-preview
       afterMiddleware: fiori-tools-appreload
       configuration:
-        component: progferie
+        component: progferieMAN
         ui5Theme: sap_horizon

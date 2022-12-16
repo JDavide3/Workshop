@@ -24,6 +24,50 @@ sap.ui.define([
             onNavigationMatched: function (oEevent) {
             },
 
+            onPending: function () {
+                let that = this;
+                this.getView().setBusy(true);
+                let aData = jQuery.ajax({
+                    type: "GET",
+                    contentType: "application/json",
+                    url: "/progferieDIP/db/odata/v4/CatalogService/Prenotazioni?$filter=isApproved eq false and isRejected eq false",
+                    dataType: "json",
+                    async: false,
+                    success: function (data, textStatus, jqXHR, oResults) {
+                        that.getView().setModel(new JSONModel(data.value), "Prenotazioni");
+                        that.getView().setBusy(false);
+                        that.getView().getModel("Prenotazioni").getData();
+                    },
+                    error: function (oError) {
+                        MessageBox.error("Errore del servizio!");
+                        console.log(oError);
+                        that.getView().setBusy(false);
+                    }
+                });
+            },
+
+            onChanged: function () {
+                let that = this;
+                this.getView().setBusy(true);
+                let aData = jQuery.ajax({
+                    type: "GET",
+                    contentType: "application/json",
+                    url: "/progferieDIP/db/odata/v4/CatalogService/Prenotazioni?$filter=isApproved eq true or isRejected eq true",
+                    dataType: "json",
+                    async: false,
+                    success: function (data, textStatus, jqXHR, oResults) {
+                        that.getView().setModel(new JSONModel(data.value), "Prenotazioni");
+                        that.getView().setBusy(false);
+                        that.getView().getModel("Prenotazioni").getData();
+                    },
+                    error: function (oError) {
+                        MessageBox.error("Errore del servizio!");
+                        console.log(oError);
+                        that.getView().setBusy(false);
+                    }
+                });
+            },
+
             onConfirm: function () {
                 let that = this;
                 MessageBox.confirm("Si è sicuri di voler procedere?", {

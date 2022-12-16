@@ -24,70 +24,26 @@ sap.ui.define([
                 this.getOwnerComponent().getRouter().getRoute("RouteView1").attachPatternMatched(this.onAjaxSearch, this)
             },
 
-            onNavigationMatched: function (oEevent) {
-            },
-
-            onConfirm: function () {
+            onChanged: function () {
                 let that = this;
-                MessageBox.confirm("Si è sicuri di voler procedere ?", {
-                    onClose: function (oAction) {
-                        if (oAction === 'OK') {
-                            let dataI = that.getView().byId("dataI").getValue();
-                            let dataF = that.getView().byId("dataF").getValue();
-
-                            let oModel = {
-                                "dataInizio": dataI,
-                                "dataFine": dataF
-                            }
-
-                            let odataModel = new ODataModel("/ui5ui/Odata/odata/v4/CatalogService/");
-                            that.getView().setBusy(true);
-                            odataModel.read("/Prenotazioni", {
-                                async: true,
-                                success: function () {
-                                    that.getView().setBusy(false);
-                                    MessageBox.success("Operazione eseguita!", {
-                                        onClose: function () {
-                                            that.getOwnerComponent().getRouter().navTo("RouteMaster");
-                                        }
-                                    });
-                                },
-                                error: function (oError) {
-                                    MessageBox.error("Errore del servizio!");
-                                    that.getView().setBusy(false);
-
-
-                                }
-                            });
-                            let aData = jQuery.ajax({
-                                type: "GET",
-                                contentType: "application/json",
-                                url: "/odata/v4/CatalogService/Prenotazioni",
-                                dataType: "json",
-                                data: JSON.stringify(oModel),
-                                async: false,
-                                success: function () {
-                                    that.getView().setBusy(false);
-                                    MessageBox.success("Operazione eseguita!", {
-                                        onClose: function () {
-                                            that.onAjaxSearch();
-                                            that.getOwnerComponent().getRouter().navTo("RouteMaster");
-                                        }
-                                    });
-                                },
-                                error: function (oError) {
-                                    MessageBox.error("Errore del servizio!");
-                                    that.getView().setBusy(false);
-                                }
-                            });
-
-                        }
+                this.getView().setBusy(true);
+                let aData = jQuery.ajax({
+                    type: "GET",
+                    contentType: "application/json",
+                    url: "/progferieMAN/db/odata/v4/CatalogService/Prenotazioni?$filter=isApproved eq true or isRejected eq true",
+                    dataType: "json",
+                    async: false,
+                    success: function (data, textStatus, jqXHR, oResults) {
+                        that.getView().setModel(new JSONModel(data.value), "Prenotazioni");
+                        that.getView().setBusy(false);
+                        that.getView().getModel("Prenotazioni").getData();
+                    },
+                    error: function (oError) {
+                        MessageBox.error("Errore del servizio!");
+                        console.log(oError);
+                        that.getView().setBusy(false);
                     }
                 });
-            },
-
-            onBack: function () {
-                this.getOwnerComponent().getRouter().navTo("RouteMaster")
             },
 
             onAjaxSearch: function () {
@@ -118,7 +74,7 @@ sap.ui.define([
                 let aData = jQuery.ajax({
                     type: "GET",
                     contentType: "application/json",
-                    url: "/progferieMAN/db/odata/v4/CatalogService/Prenotazioni?$filter=isApproved eq false;isRejected eq false",
+                    url: "/progferieMAN/db/odata/v4/CatalogService/Prenotazioni?$filter=isApproved eq false and isRejected eq false",
                     dataType: "json",
                     async: false,
                     success: function (data, textStatus, jqXHR, oResults) {
@@ -240,38 +196,7 @@ sap.ui.define([
                         });
                     }
                 });
-            },
-
-            onDelete: function () {
-                let obj = oEvent.getSource().getBindingContext("Prenotazioni").getObject();
-                let that = this;
-                MessageBox.confirm("Eliminare?", {
-                    onClose: function (oAction) {
-                        if (oAction === 'OK') {
-                            let odataModel = new ODataModel("/ui5ui/Odata/odata/v4/CatalogService/");
-                            odataModel.remove("/Prenotazioni(guid'" + obj.ID + "')", {
-                                async: true,
-                                success: function (oResults) {
-                                    MessageBox.success("Richiesta ferie rifiutata e cancellata correttamente");
-                                    that.onSearch();
-                                },
-                                error: function (oError) {
-                                    MessageBox.error("Errore nel servizio");
-                                }
-                            });
-                        }
-                    }
-                });
-            },
-
-
-            valueChanged: function (oEvent) {
-                let iValue = oEvent.getParameter("value"),
-                    oView = this.getView();
-                INDICATOR_IDS.forEach(function (sId) {
-                    oView.byId(sId).setValue(iValue);
-                });
-            },
+            }
         });
 
 

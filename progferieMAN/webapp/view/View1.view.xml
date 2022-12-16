@@ -10,8 +10,9 @@
                     <OverflowToolbar />
                 </f:content>
                 <f:actions>
-                    <Button text="Visualizza tutti" type="Emphasized" icon="sap-icon://show" press="---" />
+                    <Button text="Visualizza tutti" type="Emphasized" icon="sap-icon://show" press="onAjaxSearch" />
                     <Button text="Da approvare" type="Critical" press="onPending" />
+                    <Button text="Approvate/Rifiutate" type="Emphasized" icon="sap-icon://show" press="onChanged" />
                     <Button text="Esporta" type="Neutral" icon="sap-icon://action" press="---" />
                 </f:actions>
                 <f:navigationActions />
