@@ -95,8 +95,10 @@ sap.ui.define([
                     console.log(oFilteredPrenotazioni);
                     that.getView().setModel(new JSONModel(oFilteredPrenotazioni), "Prenotazioni");
                 }
-                
-                
+            },
+
+            onResetFilters: function() {
+                this.getView().setModel(new JSONModel(this.oPrenotazioni), "Prenotazioni");
             },
 
                     onConfirm: function () {
