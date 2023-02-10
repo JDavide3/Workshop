@@ -1,38 +1,43 @@
 sap.ui.define([], function () {
 	"use strict";
 	return {
-		formatIconColor: function (approvato, rifiutato) {
+		formatIconColor: function (approved, rejected) {
             var colore;
-			if(approvato && !(rifiutato)) 
+			if(approved && !(rejected)) 
             {
                 colore = "#31ad00";
             }
-            else if(rifiutato && !(approvato))
+            else if(rejected && !(approved))
             {
                 colore = "#ad1100";
             }
-            else if(!(approvato) && !(rifiutato))
+            else if(!(approved) && !(rejected))
             {
                 colore = "#d9db35";
             }
             return colore;
 		},
 
-        formatIcon: function (approvato, rifiutato) {
+        formatIcon: function (approved, rejected) {
             var icona;
-			if(approvato && !(rifiutato)) 
+			if(approved && !(rejected)) 
             {
                 icona = "sap-icon://thumb-up";
             }
-            else if(rifiutato && !(approvato))
+            else if(rejected && !(approved))
             {
                 icona = "sap-icon://thumb-down";
             }
-            else if(!(approvato) && !(rifiutato))
+            else if(!(approved) && !(rejected))
             {
                 icona = "sap-icon://pending";
             }
             return icona;
 		},
+
+        formatDate: function(date) {
+            var formattedDate = date.replace(/[TZ]/g, " ");
+            return formattedDate;
+        }
 	};
 });

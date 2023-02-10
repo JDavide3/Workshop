@@ -57,7 +57,7 @@
                         <cells>
                             <l:VerticalLayout>
                                 <Text text="Data Prenotazione" />
-                                <Text text="{Prenotazioni>dataPrenotazione}" />
+                                <Text text="{path: 'Prenotazioni>dataPrenotazione', formatter: '.formatter.formatDate'}" />
                             </l:VerticalLayout>
                             <l:VerticalLayout>
                                 <Text text="Data Inizio" />

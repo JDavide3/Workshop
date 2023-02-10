@@ -81,19 +81,18 @@ sap.ui.define([
             },
 
             onFilter: function(oEvent) {
-                var that = this;
                 var oFilteredPrenotazioni = [];
                 if(oEvent.getSource().sId.search("approved") > -1)
                 {
                     oFilteredPrenotazioni = this.oPrenotazioni.filter(function(n){return n.isApproved === true || n.isRejected === true})
                     console.log(oFilteredPrenotazioni);
-                    that.getView().setModel(new JSONModel(oFilteredPrenotazioni), "Prenotazioni");
+                    this.getView().setModel(new JSONModel(oFilteredPrenotazioni), "Prenotazioni");
                 }
                 else
                 {
                     oFilteredPrenotazioni = this.oPrenotazioni.filter(function(n){return n.isApproved === false && n.isRejected === false})
                     console.log(oFilteredPrenotazioni);
-                    that.getView().setModel(new JSONModel(oFilteredPrenotazioni), "Prenotazioni");
+                    this.getView().setModel(new JSONModel(oFilteredPrenotazioni), "Prenotazioni");
                 }
             },
 
