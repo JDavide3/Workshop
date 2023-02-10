@@ -4,17 +4,19 @@ sap.ui.define([
     "sap/ui/model/FilterOperator",
     "sap/ui/model/odata/v2/ODataModel",
     "sap/ui/model/json/JSONModel",
-    "sap/m/MessageBox"
-
+    "sap/m/MessageBox",
+    "../model/formatter"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, filter, filterOperator, ODataModel, JSONModel, MessageBox) {
+    function (Controller, filter, filterOperator, ODataModel, JSONModel, MessageBox, formatter) {
         "use strict";
 
         return Controller.extend("ui5.ui.controller.Inserisci", {
+            formatter: formatter,
             onInit: function () {
+                
                 this.getView().setModel(new JSONModel());
 
                 this.getOwnerComponent().getRouter().getRoute("RouteView1").attachPatternMatched(this.onAjaxSearch, this);
@@ -78,27 +80,24 @@ sap.ui.define([
                 });
             },
 
-                    onChanged: function () {
-                        let that = this;
-                        this.getView().setBusy(true);
-                        let aData = jQuery.ajax({
-                            type: "GET",
-                            contentType: "application/json",
-                            url: "/progferieDIP/db/odata/v4/CatalogService/Prenotazioni?$filter=isApproved eq true or isRejected eq true",
-                            dataType: "json",
-                            async: false,
-                            success: function (data, textStatus, jqXHR, oResults) {
-                                that.getView().setModel(new JSONModel(data.value), "Prenotazioni");
-                                that.getView().setBusy(false);
-                                that.getView().getModel("Prenotazioni").getData();
-                            },
-                            error: function (oError) {
-                                MessageBox.error("Errore del servizio!");
-                                console.log(oError);
-                                that.getView().setBusy(false);
-                            }
-                        });
-                    },
+            onFilter: function(oEvent) {
+                var that = this;
+                var oFilteredPrenotazioni = [];
+                if(oEvent.getSource().sId.search("approved") > -1)
+                {
+                    oFilteredPrenotazioni = this.oPrenotazioni.filter(function(n){return n.isApproved === true || n.isRejected === true})
+                    console.log(oFilteredPrenotazioni);
+                    that.getView().setModel(new JSONModel(oFilteredPrenotazioni), "Prenotazioni");
+                }
+                else
+                {
+                    oFilteredPrenotazioni = this.oPrenotazioni.filter(function(n){return n.isApproved === false && n.isRejected === false})
+                    console.log(oFilteredPrenotazioni);
+                    that.getView().setModel(new JSONModel(oFilteredPrenotazioni), "Prenotazioni");
+                }
+                
+                
+            },
 
                     onConfirm: function () {
                         let that = this;
@@ -222,10 +221,8 @@ sap.ui.define([
                             async: false,
                             success: function (data, textStatus, jqXHR, oResults) {
                                 that.getView().setModel(new JSONModel(data.value), "Prenotazioni");
+                                that.oPrenotazioni = data.value;
                                 that.getView().setBusy(false);
-                                that.getView().getModel("Prenotazioni").getData();
-                                //let data1 = that.getView().getModel("Prenotazioni").dataInizio;
-                                //console.log(data1);
                             },
                             error: function (oError) {
                                 MessageBox.error("Errore del servizio!");
@@ -237,36 +234,3 @@ sap.ui.define([
         });
     }
 )
-/*
-onEdit: function(oEvent) {
-    var obj = oEvent.getSource().getBindingContext("Prenotazioni").getObject();
-    obj.isApproved = true;
-    this.getView().getModel("Prenotazioni").refresh();
-},
-
-
-onSave: function(oEvent) {
-    var obj = oEvent.getSource().getBindingContext("Prenotazioni").getObject();
-    obj.isApproved = false;
-    this.getView().getModel("Prenotazioni").refresh();
-    var that=this;
-    MessageBox.confirm("Procedere con la modifica?",{
-        onClose: function (oAction){
-            if(oAction==="OK"){
-                var odataModel=new ODataModel("/progferieDIP/db/odata/v4/CatalogService/Prenotazioni");
-                odataModel.update("/Prenotazioni(guid'"+obj.ID+"')",{
-                    "isApproved":obj.isApproved;
-                },{
-                    success: function(oResults){
-                        MessageBox.success("Dati modificati correttamente");
-                    },
-                    error: function(oError){
-                        MessageBox.error("Errore nella modifica dei dati");
-                    }
-                })
-            }
-            that.getView().getModel("Prenotazioni").refresh();
-        }
-    });
-
-},*/

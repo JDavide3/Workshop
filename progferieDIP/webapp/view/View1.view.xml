@@ -11,8 +11,8 @@
                 </f:content>
                 <f:actions>
                     <Button text="Visualizza tutto" type="Emphasized" icon="sap-icon://show" press="onAjaxSearch" />
-                    <Button text="Approvate/Rifiutate" type="Emphasized" icon="sap-icon://show" press="onChanged" />
-                    <Button text="Da approvare" type="Critical" press="onPending" />
+                    <Button text="Approvate/Rifiutate" id="approved" type="Emphasized" icon="sap-icon://show" press="onFilter" />
+                    <Button text="Da approvare" id="notApproved" type="Critical" press="onFilter" />
                 </f:actions>
                 <f:navigationActions />
             </f:DynamicPageTitle>
@@ -26,7 +26,7 @@
                 <headerToolbar>
                     <Toolbar height="60px">
                         <l:VerticalLayout>
-                            <Title text="Gestione Ferie e Permessi" level="H2" class="sapUiMediumMarginTop" />
+                            <Title text="Inserimento" level="H2" class="sapUiMediumMarginTop" />
                         </l:VerticalLayout>
                     </Toolbar>
                 </headerToolbar>
@@ -74,9 +74,12 @@
                             <l:VerticalLayout>
                                 <Text text="Stato Richiesta" />
                                 <l:HorizontalLayout>
-                                    <core:Icon src="sap-icon://thumb-up" id="approvato" class="size1" color="#31ad00" visible="{= ${Prenotazioni>isApproved}===true}" />
-                                    <core:Icon src="sap-icon://thumb-down" id="rifiutato" class="size1" color="#ad1100" visible="{= ${Prenotazioni>isRejected}===true}" />
-                                    <core:Icon src="sap-icon://pending" class="size1" color="#d9db35" visible="{= ${Prenotazioni>isRejected}===false &amp;&amp; ${Prenotazioni>isApproved}===false}" />
+                                    <core:Icon
+                                        src="{parts: [{path: 'Prenotazioni>isApproved'}, {path: 'Prenotazioni>isRejected'}], formatter: '.formatter.formatIcon'}"
+                                        id="approvato"
+                                        class="size1"
+                                        color="{parts: [{path: 'Prenotazioni>isApproved'}, {path: 'Prenotazioni>isRejected'}], formatter: '.formatter.formatIconColor'}"
+                                    />
                                 </l:HorizontalLayout>
                             </l:VerticalLayout>
                             <HBox>
